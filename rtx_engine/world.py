@@ -3,13 +3,12 @@ import numpy as np
 from .light.point_light import Light
 
 class World:
-    def __init__(self):
+    def __init__(self, ambient = 0.3, background = None):
         self.elements = []
         self.lights   = []
         self.camera   = 0
-        self.ambient  = 0.3
-        self.background = None
-        self.background = cv2.imread('background.jpg')
+        self.ambient  = ambient
+        self.background = background
     
     def addLight(self, x,y,z, color=np.array([255,255,255])):
         self.lights.append(

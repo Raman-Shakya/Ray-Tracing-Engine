@@ -9,17 +9,31 @@ from rtx_engine.objects.plane import Plane
 from rtx_engine.objects.sphere import Sphere
 
 # setting up the world
-world = World()
+world = World(
+    ambient = 0.3,
+    background = cv2.imread('assets/background.jpg')
+)
 
 # adding a sphere at (75, 0, 0) with radius 50 units
 world.addObject(
     Sphere(
-        np.array([75,0,0]),50,
+        np.array([75, 0, -50]),50,
+        Material(
+            color        = np.array([1,0,1]),
+            specularCoef = 40,
+            reflective   = 0.3,
+            mapping      = cv2.imread('assets/texture.jpg')
+        )
+    )
+)
+world.addObject(
+    Sphere(
+        np.array([120, -50, 10]), 25,
         Material(
             color        = np.array([1,0,1]),
             specularCoef = 100,
-            reflective   = 0.3,
-            mapping      = cv2.imread('earth.jpg')
+            reflective   = 0,
+            mapping      = cv2.imread('assets/earth.jpg')
         )
     )
 )
@@ -30,16 +44,16 @@ world.addObject(
         np.array([0,0,-100]),
         norm(np.array([1,0,0.01])),
         Material(
-            color        = np.array([0,0,0]),
-            specularCoef = 10,
-            reflective   = 0.8,
-            # mapping      = cv2.imread('earth.jpg')
+            color        = np.array([45, 108, 99]),
+            specularCoef = 100,
+            reflective   = 0.5,
+            mapping      = None
         )
     )
 )
 
 # adding light source
-# world.addLight(100, -100, 100)
+world.addLight(100, -100, 100)
 
 
 # setting up camera
